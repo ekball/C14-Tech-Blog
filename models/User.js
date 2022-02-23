@@ -10,7 +10,35 @@ class User extends Model {
 User.init(
     // table columns
     {
-
+        // id column is an integer, cannot be null, is a primary key, and increments
+        id: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            primaryKey: true,
+            autoIncrement: true
+        },
+        // username is a string and cannot be null
+        username: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        // email is a string, cannot be null, must be unique
+        email: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            unique: true,
+            validate: {
+                isEmail: true
+            }
+        },
+        // password is a string, cannot be null, and must have at least 4 chars
+        password: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+                len: [4]
+            }
+        }
     },
     // configure table
     {
